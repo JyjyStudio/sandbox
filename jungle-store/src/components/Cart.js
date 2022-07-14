@@ -1,6 +1,7 @@
-// Variables
-const Flowers = [ {price:8, name:'Montsera'}, {price:10,name:'Lierre'}, {price:15,name:'Bouquet de fleurs'} ]
-const totalPrice = Flowers.reduce((acc,curr) => {
+import '../styles/Cart.css'
+import { plantList } from '../datas/plantList'
+
+const totalPrice = plantList.reduce((acc,curr) => {
     return acc += curr.price
 }, 0)
 
@@ -9,9 +10,9 @@ const Cart = () => (
     <div id='cart'>
         <h3> Panier : </h3>
         <ul>
-            {Flowers.map(flower =>(<li key={flower.name}>{flower.name} : {flower.price} €</li>))}
+            { plantList.map(plant => <li key={plant.id}>{plant.name} : {plant.price} €</li>) }
         </ul>
-        Total : { totalPrice } €
+        <span className='total'>Total : { totalPrice } €</span>
     </div> 
 )
 

@@ -5,7 +5,7 @@ const headerText = 'La maison jungle'.toUpperCase()
 const descriptionText = 'Ici achetez toutes les plantes dont vous avez toujours rêvé 🌵🌱🎍'
 
 const Header = () => (
-    <header className="header">
+    <header>
         <img src={logo} alt='logo' height={100}/>
         <div>
             <h1 className="header1"> {headerText} </h1>

@@ -1,12 +1,4 @@
-#cart {
-    background: #31b572;
-    width: fit-content;
-    padding: 32px;
-    border: 1px black solid;
-    margin: 30px 0;
-    color: #fff;
-}
-.header {
+header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
