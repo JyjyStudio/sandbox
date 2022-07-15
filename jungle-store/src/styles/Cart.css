@@ -1,0 +1,14 @@
+#cart {
+    background: #31b572;
+    width: fit-content;
+    padding: 32px;
+    border: 1px black solid;
+    color: #fff;
+    position: relative;
+}
+span.total {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}

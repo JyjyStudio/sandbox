@@ -1,0 +1,34 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card {
+    border: 2px black solid;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #00000070;
+    width: 200px;
+    height: 200px;
+    margin: 25px 0 25px 25px;
+    background: #31b57245;
+    position: relative;
+}
+.card h4 {
+    text-transform: capitalize;
+    margin: 10px 0;
+}
+.card > * {
+    padding: 0 25px;
+}
+.pic {
+    background-color: #00000070;
+    height: 45%;
+}
+#soldes {
+    position: absolute;
+    top: 2%;
+    right: -20px;
+    color: #fff;
+}
+.water, .light {
+    font-size: 12px;
+}

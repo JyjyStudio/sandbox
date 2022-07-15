@@ -1,0 +1,9 @@
+label {
+    margin-right: 15px;
+}
+select {
+    padding : 3px
+}
+option {
+    text-transform: capitalize;
+}
