@@ -4,7 +4,7 @@ const CareScale = ({ careType, scaleValue }) => {
 	const range = [1, 2, 3];
     const scaleType = careType === "light" ? "☀️" : "💧"
 	return (
-		<div>
+		<div className={careType}>
 			{range.map(rangeNumber => scaleValue >= rangeNumber  && 
                 <span key={uuidv4()}>{scaleType}</span>
 			)}
