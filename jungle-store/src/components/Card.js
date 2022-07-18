@@ -1,22 +1,34 @@
-import '../styles/Card.css'
-import {plantList} from '../datas/plantList'
-import CareScale from './CaresScale'
+import "../styles/Card.css"
+import CareScale from "./CaresScale"
 
-const CardItems = () => (
-	<div className='cards'>
-	{
-		plantList.map(plant => (
-			<div className="card" key={plant.name}>
-				<div className='pic'></div>
-				<h4>{plant.isBestSale ? plant.name + ' 🔥' : plant.name }</h4>
-				<span id='soldes'>{plant.isSpecialOffer && 'SOLDES 🌟'}</span>
-				<span className='price'>{plant.price} €</span>
-				<CareScale careType='water' scaleValue={plant.water} />
-				<CareScale careType='light' scaleValue={plant.light} />
-			</div>
-		))
+const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart }) => {
+
+	const addTocard = () => {
+		const currentPlantAdded = cart.find(plant => plant.name === name)
+		if(currentPlantAdded) {
+			const filteredCartWithoutPlant = cart.filter(plant => plant.name !== name)
+			updateCart([...filteredCartWithoutPlant, {name, price, quantity: currentPlantAdded.quantity + 1}]) 
+		} 
+		else updateCart( [...cart, {name, price, quantity:1} ]) 
+
 	}
-	</div>
-)
-
-export default CardItems
+	return (
+		<div className="card">
+			{isSpecialOffer && <span id="soldes">SOLDES 🌟</span>}
+			<img className="pic" src={cover} alt={name} />
+			<div className="card-content">
+				<h4>{isBestSale ? name + " 🔥" : name}</h4>
+				<span className="price">{price} €</span>
+				<CareScale careType="water" scaleValue={water} />
+				<CareScale careType="light" scaleValue={light} />
+				<button
+					className="add-cart-btn"
+					onClick={addTocard}
+				>
+					Ajouter au panier
+				</button>
+			</div>
+		</div>
+	)
+}
+export default Card
