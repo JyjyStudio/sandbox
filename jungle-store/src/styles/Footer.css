@@ -1,0 +1,30 @@
+footer {
+    border-top: 3px black solid;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
+}
+
+footer .input-container {
+    width: 40%;
+}
+
+footer h2 {
+    margin-top: 0;
+}
+
+footer input.newsletter {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+@media screen and (max-device-width : 480px) {
+    footer .input-container {
+        width: inherit;
+    }
+  }
