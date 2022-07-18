@@ -1,34 +1,55 @@
-.cards {
+.card-wrapper {
     display: flex;
     flex-wrap: wrap;
 }
 .card {
-    border: 2px black solid;
+    border: 1px lightgray solid;
     border-radius: 5px;
     box-shadow: 0 0 5px #00000070;
-    width: 200px;
-    height: 200px;
-    margin: 25px 0 25px 25px;
+    width: 250px;
+    height: fit-content;
+    margin: 25px 25px 25px 0;
     background: #31b57245;
     position: relative;
+}
+.card:hover {
+    box-shadow: 0 0 6px darkslategray;
+}
+.card-content {
+    padding: 0 25px 25px;
 }
 .card h4 {
     text-transform: capitalize;
     margin: 10px 0;
 }
-.card > * {
-    padding: 0 25px;
-}
 .pic {
-    background-color: #00000070;
-    height: 45%;
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
 }
 #soldes {
     position: absolute;
     top: 2%;
-    right: -20px;
+    right: 5px;
     color: #fff;
+    background-color: #00000070;
+    width: fit-content;
+    padding: 5px;
 }
 .water, .light {
     font-size: 12px;
 }
+button.add-cart-btn {
+    margin: 15px auto 0;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+@media screen and (max-device-width : 480px) {
+    .content {
+        padding: 25px 0 !important;
+    }
+    .card {
+        margin: 25px auto 0;
+    }
+  }

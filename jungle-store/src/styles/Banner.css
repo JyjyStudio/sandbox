@@ -4,15 +4,15 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 20px 0;
+    margin: 0;
     border-bottom: 3px black solid;
     padding-bottom: 30px;
 }
 .header1 {
     color: lightgreen;
 }
-h3 {
-    font-weight: 100;
-    border-bottom: 1px black solid;
-    margin: 0px;
+@media screen and (max-device-width : 480px) {
+    header {
+        margin-top: 20px;
+    }
 }
