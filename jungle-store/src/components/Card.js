@@ -3,7 +3,7 @@ import CareScale from "./CaresScale"
 
 const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart }) => {
 
-	const addTocard = () => {
+	const addToCart = () => {
 		const currentPlantAdded = cart.find(plant => plant.name === name)
 		if(currentPlantAdded) {
 			const filteredCartWithoutPlant = cart.filter(plant => plant.name !== name)
@@ -23,7 +23,7 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 				<CareScale careType="light" scaleValue={light} />
 				<button
 					className="add-cart-btn"
-					onClick={addTocard}
+					onClick={addToCart}
 				>
 					Ajouter au panier
 				</button>
