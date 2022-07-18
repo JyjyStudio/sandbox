@@ -2,7 +2,7 @@ import React from "react"
 import logo from '../assets/leaf.png'
 
 const headerText = 'La maison jungle'.toUpperCase()
-const descriptionText = 'Ici achetez toutes les plantes dont vous avez toujours rêvé 🌵🌱🎍'
+const descriptionText = 'Ici achetez toutes les plantes dont vous avez toujours rêvé 🌵\u00A0🌱\u00A0🎍'
 
 const Header = () => (
     <header>
