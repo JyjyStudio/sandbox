@@ -8,6 +8,12 @@ const Cart = ({cart, updateCart}) => {
         return acc = acc + (curr.price * cart[index].quantity)
     }, 0)
 
+    const deleteElement = (item) => {
+        item.quantity >=0 && item.quantity--
+        const filteredItems = cart.filter(item => item.quantity > 0)
+        updateCart([...filteredItems])
+    }
+
     const [isOpen, setIsOpen] = useState(false)
      
     return (
@@ -17,7 +23,12 @@ const Cart = ({cart, updateCart}) => {
                         <button className='open-close' onClick={() => setIsOpen(false)}>Fermer</button>
                         <h3> Panier : </h3>
                         <ul className='cart-list'>
-                            {cart.map((item, index) => <li className='cart-item' key={`${item.id}-${index}`}>{item.name} : {item.price} € X{item.quantity}</li>) }
+                            { cart.map((item, index) => 
+                                <li className='cart-item' key={`${item.id}-${index}`}>
+                                    <span className='item'>🌻 {item.name} : {item.price}€ X{item.quantity}</span>
+                                    <span className='delete-item' onClick={() => deleteElement(item)}>⛔</span>
+                                </li>) 
+                            }
                         </ul>
                         {cart.length ? (
                             <React.StrictMode>
@@ -25,7 +36,7 @@ const Cart = ({cart, updateCart}) => {
                                 <button className='empty-cart' onClick={() => updateCart([])}>Vider le panier</button>
                             </React.StrictMode>
                         ) 
-                        : <span>Votre panier est vide</span>}
+                        : <span className='empty-cart-msg'>Votre panier est vide</span>}
                         
                     </React.StrictMode>
                 ) : (
