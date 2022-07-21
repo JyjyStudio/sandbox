@@ -1,0 +1,13 @@
+label {
+    margin-right: 15px;
+}
+select {
+    padding : 3px
+}
+option {
+    text-transform: capitalize;
+}
+.reset-category-btn {
+    margin-left: 10px;
+    padding: 2px;
+}
