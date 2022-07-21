@@ -1,6 +1,6 @@
 #cart {
     background: #31b572;
-    width: 50%;
+    min-width: 17%;
     padding: 25px;
     border-left: 1px black solid;
     border-right: 1px black solid;
@@ -57,4 +57,4 @@ button.open-close:hover {
     #cart {
         width: inherit;
     }
-  }
+}
