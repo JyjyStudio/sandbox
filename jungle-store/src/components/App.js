@@ -9,16 +9,18 @@ import Footer from "./Footer"
 const App = () => {
 
 	const [cart, updateCart] = useState([])
+    const [productList, setProductList] = useState(plantList)
+    const [isOpen, setIsOpen] = useState(false)
 
 	return (
 		<React.StrictMode>
 			<Banner />
 			<div className="container">
-				<Cart cart={cart} updateCart={updateCart} />
+				<Cart cart={cart} updateCart={updateCart} isOpen={isOpen} setIsOpen={setIsOpen} />
 				<div className="content">
-					<Categories />
+					<Categories productList={productList} setProductList={setProductList} />
 					<div className="card-wrapper">
-						{plantList.map(plant => (
+						{productList.map(plant => (
 							<Card
 								key={plant.id}
 								name={plant.name}
@@ -31,6 +33,7 @@ const App = () => {
 								cover={plant.cover}
 								updateCart={updateCart}
 								cart={cart}
+								setIsOpen={setIsOpen}
 							/>
 						))}
 					</div>
