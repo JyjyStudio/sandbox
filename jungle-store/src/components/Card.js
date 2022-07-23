@@ -1,7 +1,10 @@
 import "../styles/Card.css"
 import CareScale from "./CaresScale"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart }) => {
+const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart, setIsOpen }) => {
+
 
 	const addToCart = () => {
 		const currentPlantAdded = cart.find(plant => plant.name === name)
@@ -10,8 +13,13 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 			updateCart([...filteredCartWithoutPlant, {name, price, quantity: currentPlantAdded.quantity + 1}]) 
 		} 
 		else updateCart( [...cart, {name, price, quantity:1} ]) 
-
+		// ouvre le panier si il est fermé lors de l'ajout d'un produit 
+		setIsOpen(true)
+		// success message
+		const formattedName = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+		toast(`${formattedName} à bien été ajouté au panier !`)
 	}
+
 	return (
 		<div className="card">
 			{isSpecialOffer && <span id="soldes">SOLDES 🌟</span>}
