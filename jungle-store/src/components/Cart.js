@@ -1,8 +1,9 @@
 import '../styles/Cart.css'
-import {useState} from 'react'
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-const Cart = ({cart, updateCart}) => {
+const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
     
     const totalPrice = cart.reduce((acc, curr, index) => {
         return acc = acc + (curr.price * cart[index].quantity)
@@ -12,9 +13,14 @@ const Cart = ({cart, updateCart}) => {
         item.quantity >=0 && item.quantity--
         const filteredItems = cart.filter(item => item.quantity > 0)
         updateCart([...filteredItems])
+		const formattedName = item.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+        toast(`${formattedName} à bien été retiré du panier!`)    
     }
 
-    const [isOpen, setIsOpen] = useState(false)
+    const emptyCart = () => {
+        updateCart([])
+        toast('Votre panier à bien été vidé !')
+    }
      
     return (
         <div id='cart'>
@@ -33,7 +39,7 @@ const Cart = ({cart, updateCart}) => {
                         {cart.length ? (
                             <React.StrictMode>
                                 <span className='total'>Total : { totalPrice } €</span>
-                                <button className='empty-cart' onClick={() => updateCart([])}>Vider le panier</button>
+                                <button className='empty-cart' onClick={() => emptyCart()}>Vider le panier</button>
                             </React.StrictMode>
                         ) 
                         : <span className='empty-cart-msg'>Votre panier est vide</span>}
@@ -46,6 +52,7 @@ const Cart = ({cart, updateCart}) => {
                     </React.StrictMode>                  
                 )
             }
+            <ToastContainer />
         </div> 
     )
 }
