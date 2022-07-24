@@ -1,12 +1,12 @@
 import '../styles/Footer.css'
-import Input from './Input'
+import FooterInput from './FooterInput'
 
 const Footer = () => {
 
     return (
         <footer>
             <h2 className="msg">Pour les passionné·e·s de plantes 🌿🌱🌵</h2>
-            <Input />
+            <FooterInput />
         </footer>
     )
 }
