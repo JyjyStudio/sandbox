@@ -1,11 +1,10 @@
-import '../styles/List.css'
-import React, { useState } from "react"
+import '../styles/Categories.css'
+import React from "react"
 import { plantList } from "../datas/plantList"
 
 
-const Categories = () => {
+const Categories = ({productList, setProductList}) => {
 
-    const [productList, setProductList] = useState(plantList)
 
     const categoriesList = plantList.reduce((acc, curr) => {
         if(!acc.includes(curr.category)) acc.push(curr.category)
@@ -14,10 +13,13 @@ const Categories = () => {
 
     const checkCategory = () => {
         const selectInput = document.getElementById('categories')
-        const goodCategory = [...productList].filter(product => product.category === selectInput.value)
-        setProductList(goodCategory)
-        console.log({productList});
-        console.log(selectInput.value);
+        const filteredProducts = [...plantList].filter(product => categoriesList.includes(selectInput.value) ? selectInput.value === product.category : productList)
+        setProductList(filteredProducts)
+    }
+
+    const resetCategory = () => {
+        setProductList(plantList)
+        document.getElementById('categories').value = 'Selectionner une catégorie 🌻'
     }
 
     return (
@@ -31,6 +33,7 @@ const Categories = () => {
                     ))
                 }
             </select>
+            <button className='reset-category-btn' onClick={resetCategory}>Réinitialiser</button>
         </React.StrictMode>
     )
 }
