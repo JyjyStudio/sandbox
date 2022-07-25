@@ -8,9 +8,14 @@ import Footer from "./Footer"
 
 const App = () => {
 
-	const [cart, updateCart] = useState([])
-    const [productList, setProductList] = useState(plantList)
-    const [isOpen, setIsOpen] = useState(false)
+	// recupération du state du panier depuis le localstorage
+	const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || []
+	// sauvegarde du panier dans le state
+	const [cart, updateCart] = useState(cartFromLocalStorage)
+	// gestion du select des categories
+	const [productList, setProductList] = useState(plantList)
+	// gestion du panier (ouvert/fermé)
+	const [isOpen, setIsOpen] = useState(true)
 
 	return (
 		<React.StrictMode>
