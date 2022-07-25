@@ -24,7 +24,7 @@ const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
      
     return (
         <div id='cart'>
-            { isOpen ?  
+            { (isOpen || cart.length) ?  
                 (   <React.StrictMode>
                         <button className='open-close' onClick={() => setIsOpen(false)}>Fermer</button>
                         <h3> Panier : </h3>
