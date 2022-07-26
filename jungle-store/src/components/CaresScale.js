@@ -1,4 +1,5 @@
 import {v4 as uuidv4} from 'uuid'
+import PropTypes from 'prop-types'
 
 const CareScale = ({ careType, scaleValue }) => {
 	const range = [1, 2, 3];
@@ -12,4 +13,8 @@ const CareScale = ({ careType, scaleValue }) => {
 	);
 };
 
+CareScale.propTypes = {
+	careType : PropTypes.string,
+	scaleValue : PropTypes.number,
+}
 export default CareScale;

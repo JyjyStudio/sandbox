@@ -2,6 +2,7 @@ import '../styles/Cart.css'
 import React from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import PropTypes from 'prop-types'
 
 const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
     
@@ -55,6 +56,13 @@ const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
             <ToastContainer />
         </div> 
     )
+}
+
+Cart.propTypes = {
+	cart : PropTypes.array,
+	updateCart : PropTypes.func,
+	isOpen : PropTypes.bool,
+	setIsOpen : PropTypes.func,
 }
 
 export default Cart

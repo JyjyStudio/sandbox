@@ -1,8 +1,9 @@
 import "../styles/Card.css"
 import CareScale from "./CaresScale"
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from "react";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useEffect } from "react"
+import PropTypes from 'prop-types'
 
 const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart, setIsOpen }) => {
 
@@ -50,4 +51,16 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 	)
 }
 
+Card.propTypes = {
+	name : PropTypes.string,
+	cover : PropTypes.string,
+	isSpecialOffer : PropTypes.bool,
+	isBestSale : PropTypes.bool,
+	price : PropTypes.number,
+	water : PropTypes.number,
+	light : PropTypes.number,
+	cart : PropTypes.array,
+	updateCart : PropTypes.func,
+	setIsOpen : PropTypes.func
+}
 export default Card
