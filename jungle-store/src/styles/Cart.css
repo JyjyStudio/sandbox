@@ -49,10 +49,7 @@ button.open-close {
 button.open-close:hover {
     text-decoration: underline;
 }
-.empty-cart {
-    margin-top: 20px;
-    display: block;
-}
+
 @media screen and (max-device-width : 480px) {
     #cart {
         width: inherit;

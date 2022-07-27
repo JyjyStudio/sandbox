@@ -39,17 +39,13 @@
 .water, .light {
     font-size: 12px;
 }
-button.add-cart-btn {
-    margin: 15px auto 0;
-    cursor: pointer;
-    width: 100%;
-    display: block;
-}
+
 @media screen and (max-device-width : 480px) {
     .content {
         padding: 25px 0 !important;
     }
     .card {
         margin: 25px auto 0;
+		width: 100%;
     }
   }

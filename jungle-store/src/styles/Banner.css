@@ -14,5 +14,6 @@ header {
 @media screen and (max-device-width : 480px) {
     header {
         margin-top: 20px;
+		width: 100%;
     }
 }
