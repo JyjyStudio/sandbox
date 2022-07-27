@@ -14,7 +14,11 @@ const CareScale = ({ careType, scaleValue }) => {
 };
 
 CareScale.propTypes = {
-	careType : PropTypes.string,
-	scaleValue : PropTypes.number,
+	careType : PropTypes.string.isRequired,
+	scaleValue : PropTypes.number.isRequired,
+}
+CareScale.defaultProps = {
+    careType: '',
+    scaleValue: 0,
 }
 export default CareScale;

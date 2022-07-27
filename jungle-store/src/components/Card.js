@@ -52,15 +52,25 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 }
 
 Card.propTypes = {
-	name : PropTypes.string,
-	cover : PropTypes.string,
-	isSpecialOffer : PropTypes.bool,
-	isBestSale : PropTypes.bool,
-	price : PropTypes.number,
-	water : PropTypes.number,
-	light : PropTypes.number,
-	cart : PropTypes.array,
-	updateCart : PropTypes.func,
-	setIsOpen : PropTypes.func
+	name : PropTypes.string.isRequired,
+	cover : PropTypes.string.isRequired,
+	isSpecialOffer : PropTypes.bool.isRequired,
+	isBestSale : PropTypes.bool.isRequired,
+	price : PropTypes.number.isRequired,
+	water : PropTypes.number.isRequired,
+	light : PropTypes.number.isRequired,
+	cart : PropTypes.array.isRequired,
+	updateCart : PropTypes.func.isRequired,
+	setIsOpen : PropTypes.func.isRequired
+}
+Card.defaultProps = {
+    name : 'Plante',
+	cover : '',
+	isSpecialOffer : false,
+	isBestSale : false,
+	price : 1000,
+	water : 0,
+	light : 0,
+	cart : [],
 }
 export default Card
