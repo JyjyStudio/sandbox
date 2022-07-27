@@ -2,6 +2,8 @@ import '../styles/Categories.css'
 import React from 'react'
 import { plantList } from '../datas/plantList'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Button from './Button'
 
 const Categories = ({ productList, setProductList }) => {
 	const categoriesList = plantList.reduce((acc, curr) => {
@@ -25,7 +27,7 @@ const Categories = ({ productList, setProductList }) => {
 	}
 
 	return (
-		<React.StrictMode>
+		<CategoryContainer>
 			<label htmlFor="categories">Catégories</label>
 			<select id="categories" onChange={() => checkCategory()}>
 				<option key="placeholder">Selectionner une catégorie 🌻</option>
@@ -35,10 +37,10 @@ const Categories = ({ productList, setProductList }) => {
 					</option>
 				))}
 			</select>
-			<button className="reset-category-btn" onClick={resetCategory}>
+			<Button centerMobile ml10 cursorPointer onClick={resetCategory}>
 				Réinitialiser
-			</button>
-		</React.StrictMode>
+			</Button>
+		</CategoryContainer>
 	)
 }
 
@@ -46,5 +48,10 @@ Categories.propTypes = {
 	productList : PropTypes.array.isRequired,
 	setProductList : PropTypes.func.isRequired
 }
+
+const CategoryContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+`
 
 export default Categories

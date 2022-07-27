@@ -3,6 +3,7 @@ import React from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PropTypes from 'prop-types'
+import Button from './Button'
 
 const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
     
@@ -40,7 +41,7 @@ const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
                         {cart.length ? (
                             <React.StrictMode>
                                 <span className='total'>Total : { totalPrice } €</span>
-                                <button className='empty-cart' onClick={() => emptyCart()}>Vider le panier</button>
+                                <Button mt20 cursorPointer  onClick={() => emptyCart()}>Vider le panier</Button>
                             </React.StrictMode>
                         ) 
                         : <span className='empty-cart-msg'>Votre panier est vide</span>}

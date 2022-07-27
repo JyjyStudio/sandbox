@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useEffect } from "react"
 import PropTypes from 'prop-types'
+import Button from "./Button"
 
 const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, cart, updateCart, setIsOpen }) => {
 
@@ -40,12 +41,9 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 				<span className="price">{price} €</span>
 				<CareScale careType="water" scaleValue={water} />
 				<CareScale careType="light" scaleValue={light} />
-				<button
-					className="add-cart-btn"
-					onClick={addToCart}
-				>
+				<Button center large mt15 cursorPointer onClick={addToCart}>
 					Ajouter au panier
-				</button>
+				</Button>
 			</div>
 		</div>
 	)
@@ -73,4 +71,5 @@ Card.defaultProps = {
 	light : 0,
 	cart : [],
 }
+
 export default Card
