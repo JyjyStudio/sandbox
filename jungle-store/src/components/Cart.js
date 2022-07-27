@@ -59,10 +59,10 @@ const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
 }
 
 Cart.propTypes = {
-	cart : PropTypes.array,
-	updateCart : PropTypes.func,
-	isOpen : PropTypes.bool,
-	setIsOpen : PropTypes.func,
+	cart : PropTypes.array.isRequired,
+	updateCart : PropTypes.func.isRequired,
+	isOpen : PropTypes.bool.isRequired,
+	setIsOpen : PropTypes.func.isRequired,
 }
 
 export default Cart

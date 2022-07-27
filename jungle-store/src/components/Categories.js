@@ -43,8 +43,8 @@ const Categories = ({ productList, setProductList }) => {
 }
 
 Categories.propTypes = {
-	productList : PropTypes.array,
-	setProductList : PropTypes.func
+	productList : PropTypes.array.isRequired,
+	setProductList : PropTypes.func.isRequired
 }
 
 export default Categories
