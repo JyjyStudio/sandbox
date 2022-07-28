@@ -41,7 +41,7 @@ const Cart = ({ cart, updateCart, isOpen, setIsOpen }) => {
                         {cart.length ? (
                             <React.StrictMode>
                                 <span className='total'>Total : { totalPrice } €</span>
-                                <Button mt20 cursorPointer  onClick={() => emptyCart()}>Vider le panier</Button>
+                                <Button margin='20px 0 0 0' cursor='pointer' display='block' onClick={() => emptyCart()}>Vider le panier</Button>
                             </React.StrictMode>
                         ) 
                         : <span className='empty-cart-msg'>Votre panier est vide</span>}

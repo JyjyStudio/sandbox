@@ -37,7 +37,7 @@ const Categories = ({ productList, setProductList }) => {
 					</option>
 				))}
 			</select>
-			<Button centerMobile ml10 cursorPointer onClick={resetCategory}>
+			<Button centerMobile margin='0 0 0 10px' cursor='pointer' onClick={resetCategory}>
 				Réinitialiser
 			</Button>
 		</CategoryContainer>

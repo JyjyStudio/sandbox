@@ -41,7 +41,7 @@ const Card = ({ name, cover, isSpecialOffer, isBestSale, price, water, light, ca
 				<span className="price">{price} €</span>
 				<CareScale careType="water" scaleValue={water} />
 				<CareScale careType="light" scaleValue={light} />
-				<Button center large mt15 cursorPointer onClick={addToCart}>
+				<Button large margin='15px 0 0 0' cursorPointer onClick={addToCart}>
 					Ajouter au panier
 				</Button>
 			</div>
@@ -62,7 +62,7 @@ Card.propTypes = {
 	setIsOpen : PropTypes.func.isRequired
 }
 Card.defaultProps = {
-    name : 'Plante',
+    name : 'Titre de la plante',
 	cover : '',
 	isSpecialOffer : false,
 	isBestSale : false,
