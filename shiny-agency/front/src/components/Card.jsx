@@ -6,7 +6,7 @@ import colors from '../utils/colors'
 const Card = ({ name, jobTitle, picture }) => {
 	return (
 		<CardContainer>
-			<JobTitle style={{color: colors.blueBackground}}>{jobTitle}</JobTitle>
+			<JobTitle>{jobTitle}</JobTitle>
 			<CardImg src={picture} alt="freelance" />
 			<Name>{name}</Name>
 		</CardContainer>
@@ -42,14 +42,14 @@ const CardContainer = styled.div`
 `
 const JobTitle = styled.span`
 	color: ${colors.blueBackground};
-	align-self: start;
 `
 const Name = styled.span`
 	color: black;
 `
 const CardImg = styled.img`
-	height: 100px;
-	width: 100px;
+	height: 120px;
+	width: 120px;
+	border-radius: 50%;
 `
 
 export default Card
