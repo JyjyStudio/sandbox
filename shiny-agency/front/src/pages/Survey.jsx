@@ -11,8 +11,11 @@ const Survey = () => {
 
 	const nextQuestion = `/questionnaire/${questionInt + 1}`
 
+	if(questionInt < 1 || questionInt > 10) return <Navigate to='/questionnaire/1' replace />
+	
 	return (
 		<SurveyContainer>
+
 			<H1>Question {questionInt}</H1>
 			<Question>Votre application doit-elle impérativement apparaître en premier dans les résultats de recherche ?</Question>
 			<Response>
@@ -32,7 +35,6 @@ const Survey = () => {
 					</LinksContainer>
 				}
 
-				{ (questionInt < 1 || questionInt > 10) && <Navigate to='/questionnaire/1' replace/> }
 		</SurveyContainer>
 	)
 }
