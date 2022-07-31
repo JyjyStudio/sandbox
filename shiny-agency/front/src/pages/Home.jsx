@@ -6,7 +6,7 @@ import RectangleContainer from "../components/RectangleContainer"
 import FirstHeading from "../components/FirstHeading"
 
 const Home = () => (
-	<RectangleContainer>
+	<RectangleContainer justifyContent="space-evenly">
 		<div>
 			<FirstHeading width="550px" fontSize="50px">Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents</FirstHeading>
 			<Link to="/questionnaire/1">
