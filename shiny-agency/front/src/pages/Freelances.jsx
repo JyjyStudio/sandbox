@@ -6,31 +6,44 @@ import FirstHeading from '../components/FirstHeading'
 import colors from '../utils/colors'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Loader } from '../components/Loader'
 
 const Freelances = () => {
 
 	const [freelancers, setFreelancers] = useState([])
+	const [loading, setLoading] = useState(true)
 
 	useEffect( () => {
-		axios.get('http://localhost:8000/freelances')
-		.then(res => {
-			const freelancersList = res.data
-			setFreelancers(freelancersList['freelancersList'])
-		})
+		try {
+			axios.get('http://localhost:8000/freelances')
+			.then(res => {
+				const freelancersList = res.data
+				setFreelancers(freelancersList['freelancersList'])
+				setLoading(false)
+			})
+		}
+		catch (err) {
+			console.log(err)
+		}
 	}, [])
-	console.log(freelancers);
+
 	return (
-		<React.StrictMode>
-			<FirstHeading textAlign="center">Trouvez votre prestataire</FirstHeading>
-			<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
-			<CardsContainer display="grid" gridTemplateCol="repeat(auto-fill, 300px)" margin="100px 0" >
-				{ freelancers.map(freelance => 
-					<LinkedCards to={'/freelances/' + freelance.name.split(' ').join('-')} key={uuidv4()} state={freelance}>
-						<Card jobTitle={freelance.job} picture={freelance.picture} name={freelance.name} />
-					</LinkedCards>
-				)}
-			</CardsContainer>
-		</React.StrictMode>
+			<React.StrictMode>
+				<FirstHeading textAlign="center">Trouvez votre prestataire</FirstHeading>
+				<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
+				{ 	loading ? 
+						<Loader />
+					: (
+						<CardsContainer display="grid" gridTemplateCol="repeat(auto-fill, 300px)" margin="100px 0" >
+								{ freelancers.map(freelance => 
+									<LinkedCards to={'/freelances/' + freelance.name.split(' ').join('-')} key={uuidv4()} state={freelance}>
+										<Card jobTitle={freelance.job} picture={freelance.picture} name={freelance.name} />
+									</LinkedCards>
+								)}
+							</CardsContainer>
+					) 
+				}
+			</React.StrictMode>
 	)
 }
 
