@@ -1,33 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
+import { Loader } from '../components/Loader'
 import colors from '../utils/colors'
+import axios from 'axios'
 
 const Survey = () => {
-	const { question } = useParams()
-	let questionInt = parseInt(question)
-	const previousQuestion = (1 < questionInt < 10) ? `/questionnaire/${questionInt - 1}` : '/'
+	const [questions, setquestions] = useState("")
+	const [loading, setLoading] = useState(true)
 
-	const nextQuestion = `/questionnaire/${questionInt + 1}`
-
-	if(questionInt < 1 || questionInt > 10) return <Navigate to='/questionnaire/1' replace />
+	const { questionNumber } = useParams()
+	const questionNumberInt = parseInt(questionNumber)
+	const previousQuestion = (1 < questionNumberInt < 10) ? `/questionnaire/${questionNumberInt - 1}` : '/'
 	
-	return (
+	useEffect(() => {
+		try {
+			axios.get('http://localhost:8000/survey')
+			.then(response => {
+					const {surveyData} = response.data
+					setLoading(false)
+					setquestions(surveyData)
+			})
+		}
+		catch (err) {
+			console.log(err)
+		}
+	}, [])
+	
+	const nextQuestion = `/questionnaire/${questionNumberInt + 1}`
+	if(questionNumberInt < 1 || questionNumberInt > 10) return <Navigate to='/questionnaire/1' replace />
+	
+	if(loading) return <Loader/>
+	else return (
 		<SurveyContainer>
-
-			<H1>Question {questionInt}</H1>
-			<Question>Votre application doit-elle impérativement apparaître en premier dans les résultats de recherche ?</Question>
+			
+			<H1>Question {questionNumberInt}</H1>
+			<Question>{questions[questionNumberInt]}</Question>
 			<Response>
 				<Button blueHover padding="25px 100px" margin="0 25px" color="black">Oui</Button>
 				<Button blueHover padding="25px 100px" margin="0 25px" color="black">Non</Button>
 			</Response>
 				{
 					<LinksContainer>
-						<StyledLinks style={{ pointerEvents: (questionInt === 1) && 'none', textDecoration: (questionInt === 1) && 'none' }} to={previousQuestion}>
+						<StyledLinks style={{ pointerEvents: (questionNumberInt === 1) && 'none', textDecoration: (questionNumberInt === 1) && 'none' }} to={previousQuestion}>
 							Précédent
 						</StyledLinks>
-						{ questionInt === 10 ?
+						{ questionNumberInt === 10 ?
 							<StyledLinks to='/resultats'>Résultats</StyledLinks>
 							:
 							<StyledLinks to={nextQuestion}>Suivant</StyledLinks>
