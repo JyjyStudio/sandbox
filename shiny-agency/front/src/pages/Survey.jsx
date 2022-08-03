@@ -1,55 +1,67 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import { Loader } from '../components/Loader'
 import colors from '../utils/colors'
 import axios from 'axios'
+import { SurveyContext, ThemeContext } from '../utils/Context/Context'
+import SecondHeading from '../components/SecondHeading'
 
 const Survey = () => {
 	const [questions, setquestions] = useState("")
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
+
+	const { answers, saveAnswers } = useContext(SurveyContext) 
+	const {theme} = useContext(ThemeContext)
 
 	const { questionNumber } = useParams()
 	const questionNumberInt = parseInt(questionNumber)
 	const previousQuestion = (1 < questionNumberInt < 10) ? `/questionnaire/${questionNumberInt - 1}` : '/'
+	const nextQuestion = `/questionnaire/${questionNumberInt + 1}`
 	
+	const saveReply = answer =>	saveAnswers({ [questionNumber]: answer });
+	
+
 	useEffect(() => {
-		try {
-			axios.get('http://localhost:8000/survey')
-			.then(response => {
-					const {surveyData} = response.data
-					setLoading(false)
-					setquestions(surveyData)
-			})
-		}
-		catch (err) {
+		axios.get('http://localhost:8000/survey')
+		.then(response => {
+				const {surveyData} = response.data
+				setLoading(false)
+				setquestions(surveyData)
+		})
+		.catch (function (err) {
 			console.log(err)
-		}
+			setError(true)
+			setErrorMessage(err)
+		})
 	}, [])
 	
-	const nextQuestion = `/questionnaire/${questionNumberInt + 1}`
-	if(questionNumberInt < 1 || questionNumberInt > 10) return <Navigate to='/questionnaire/1' replace />
+	if(questionNumberInt < 1 || questionNumberInt > 6) return <Navigate to='/questionnaire/1' replace />
 	
-	if(loading) return <Loader/>
+	if(error) return (<SecondHeading $isDarkMode={theme === 'dark'} textAlign="center">Oops, une erreur est survenue.. <br/>({errorMessage.message}) </SecondHeading>) 
+	else if(loading) return <Loader/>
 	else return (
+
 		<SurveyContainer>
 			
 			<H1>Question {questionNumberInt}</H1>
 			<Question>{questions[questionNumberInt]}</Question>
 			<Response>
-				<Button blueHover padding="25px 100px" margin="0 25px" color="black">Oui</Button>
-				<Button blueHover padding="25px 100px" margin="0 25px" color="black">Non</Button>
+				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(true)}  >Oui</Button>
+				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(false)}  >Non</Button>
 			</Response>
 				{
 					<LinksContainer>
-						<StyledLinks style={{ pointerEvents: (questionNumberInt === 1) && 'none', textDecoration: (questionNumberInt === 1) && 'none' }} to={previousQuestion}>
+						<StyledLinks $isDarkMode={theme === 'dark'} style={{ pointerEvents: (questionNumberInt === 1) && 'none', textDecoration: (questionNumberInt === 1) && 'none' }} to={previousQuestion}>
 							Précédent
 						</StyledLinks>
-						{ questionNumberInt === 10 ?
-							<StyledLinks to='/resultats'>Résultats</StyledLinks>
+						{ questionNumberInt === 6 ?
+							<StyledLinks $isDarkMode={theme === 'dark'} to='/resultats'>Résultats</StyledLinks>
 							:
-							<StyledLinks to={nextQuestion}>Suivant</StyledLinks>
+							<StyledLinks $isDarkMode={theme === 'dark'} to={nextQuestion}>Suivant</StyledLinks>
 						}
 					</LinksContainer>
 				}
@@ -81,9 +93,10 @@ const LinksContainer = styled.div`
     align-items: center;
 `
 const StyledLinks = styled(Link)`
-	color: ${colors.primary};
+
+	color: ${ ({$isDarkMode}) => $isDarkMode ? '#fff' : colors.primary};
 	&:hover {
-		color: #61dafb;
+		color: ${colors.blueBackground};
 	}	
 `
 
