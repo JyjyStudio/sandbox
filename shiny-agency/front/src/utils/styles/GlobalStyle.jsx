@@ -17,8 +17,11 @@ const StyledGlobalStyle = createGlobalStyle`
 		background-color: ${props  => props.isDarkMode ? '#333' : '#f1f1f1'};
 	}
 	
-    p, a, button {
+    p, a, button, h1 {
 		color: ${props  => props.isDarkMode ? '#f1f1f1' : '#333'}; 
     }
-	
+
+	a:hover{
+		color: ${props => props.isDarkMode ? 'white' : "blue" }
+	}
 `

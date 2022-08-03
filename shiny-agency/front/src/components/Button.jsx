@@ -11,9 +11,10 @@ const Button = styled.button`
 	cursor: pointer;
 	font-size: 17px;
 	&:hover {
-		color: ${colors.primary};
-		border: ${props => props.blueHover && `1px ${colors.blueBackground} solid`};
+		color: ${props => props.hoverColor};
+		border: ${props => props.blueHover && `2px ${colors.blueBackground} solid`};
 		background-color: ${props => props.hoverBackground};
+		text-decoration: ${( {textDecoration} ) => textDecoration};
 	}
 `
 

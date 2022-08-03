@@ -5,6 +5,7 @@ const SecondHeading = styled.h2`
 	font-size: ${props => props.fontSize};
 	text-align: ${props => props.textAlign};
 	margin: ${props => props.margin};
+	color: ${({$isDarkMode}) => $isDarkMode ? 'white' : 'true'}
 `
 
 export default SecondHeading

@@ -10,5 +10,7 @@ const RectangleContainer = styled.div`
 	background-color: ${colors.backgroundLight};
 	width: 95%;
     margin: 0 auto;
+	padding: 10px;
+	border-radius: 5px;
 `
 export default RectangleContainer

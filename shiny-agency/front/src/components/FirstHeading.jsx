@@ -5,6 +5,7 @@ const FirstHeading = styled.h1`
 	font-size: ${props => props.fontSize};
 	text-align: ${props => props.textAlign};
 	margin: ${props => props.margin};
+	color:${props => props.color};
 `
 
 export default FirstHeading
