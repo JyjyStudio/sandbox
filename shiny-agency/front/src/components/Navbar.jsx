@@ -1,19 +1,36 @@
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import colors from "../utils/colors"
-import Button from "./Button"
+import { useContext } from 'react'
+import { ThemeContext } from '../utils/Context/Context'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import colors from '../utils/colors'
+import Button from './Button'
 
-const Navbar = () => (
-	<Nav>
-		<StyledLink to="/">Accueil</StyledLink>
+const Navbar = () => {
 
-		<StyledLink to="/freelances">Profils</StyledLink>
+	const {theme} = useContext(ThemeContext)
 
-		<StyledLink to="/questionnaire/1">
-			<Button padding="8px 30px" backgroundColor={colors.blueBackground} color="white">Faire le test</Button>
-		</StyledLink>
-	</Nav>
-)
+	return (
+		<Nav>
+			<StyledLink $isDarkMode={theme === 'dark'} to="/">
+				Accueil
+			</StyledLink>
+
+			<StyledLink $isDarkMode={theme === 'dark'} to="/freelances">
+				Profils
+			</StyledLink>
+
+			<StyledLink to="/questionnaire/1">
+				<Button
+					padding="8px 30px"
+					backgroundColor={colors.blueBackground}
+					color="white"
+				>
+					Faire le test
+				</Button>
+			</StyledLink>
+		</Nav>
+	)
+}
 
 const Nav = styled.nav`
 	display: flex;
@@ -25,12 +42,12 @@ const Nav = styled.nav`
 	font-weight: 500;
 	margin-bottom: 50px;
 `
-const StyledLink = styled(Link)`
-	color: ${colors.secondary};
+export const StyledLink = styled(Link)`
+	color: ${props => props.$isDarkMode ? 'white' : 'black'};
 	text-decoration: none;
 
 	&:hover {
-		color: ${colors.primary};
+		color: ${props => props.$isDarkMode ? colors.secondary : colors.blueBackground};
 		text-decoration: underline;
 	}
 `
