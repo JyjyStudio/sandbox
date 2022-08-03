@@ -5,10 +5,10 @@ import { ThemeContext } from '../utils/Context/Context'
 
 export default function Footer() {
 	const {theme, toggleTheme} = useContext(ThemeContext)
-	console.log(theme);
+
 	return (
 		<FooterContainer>
-			<NightModeBtn onClick={toggleTheme}>Mode {theme === 'light' ? 'nuit 🌙' : 'jour ☀️'}</NightModeBtn>
+			<NightModeBtn border="2px black solid" isDarkMode={theme === 'dark'} onClick={toggleTheme}>Mode {theme === 'light' ? 'nuit 🌙' : 'jour ☀️'}</NightModeBtn>
 		</FooterContainer>
 	)
 }
@@ -23,7 +23,13 @@ const FooterContainer = styled.div`
 
 const NightModeBtn = styled.button`
 	background-color: transparent;
-	border: none;
+	border: ${({border}) => border};
 	cursor: pointer;
-	color: ${colors.secondary};
+	color: ${({isDarkMode}) => isDarkMode ? '#fff' : colors.secondary};
+	margin-bottom: 40px;
+	padding: 10px 20px;
+	border-radius: 5px;
+	&:hover {
+		background: lightgray;
+	}
 `

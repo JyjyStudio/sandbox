@@ -8,7 +8,7 @@ import FirstHeading from "../components/FirstHeading"
 const Home = () => (
 	<RectangleContainer justifyContent="space-evenly">
 		<div>
-			<FirstHeading width="550px" fontSize="50px">Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents</FirstHeading>
+			<FirstHeading color="#000" width="550px" fontSize="50px">Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents</FirstHeading>
 			<Link to="/questionnaire/1">
 				<Button color="white" padding="8px 30px" backgroundColor={colors.blueBackground}>Faire le test</Button>
 			</Link>
