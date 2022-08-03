@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Card from '../components/Card'
 import {v4 as uuidv4} from 'uuid'
 import styled from 'styled-components'
@@ -7,29 +7,37 @@ import colors from '../utils/colors'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Loader } from '../components/Loader'
+import SecondHeading from '../components/SecondHeading'
+import { ThemeContext } from '../utils/Context/Context'
 
 const Freelances = () => {
 
+	const {theme} = useContext(ThemeContext)
+
 	const [freelancers, setFreelancers] = useState([])
 	const [loading, setLoading] = useState(true)
+	
+	const [error, setError] = useState(false)
+	const [errorContent, setErrorContent] = useState('')
 
 	useEffect( () => {
-		try {
-			axios.get('http://localhost:8000/freelances')
-			.then(res => {
-				const freelancersList = res.data
-				setFreelancers(freelancersList['freelancersList'])
-				setLoading(false)
-			})
-		}
-		catch (err) {
+		axios.get('http://localhost:8000/freelances')
+		.then(res => {
+			const freelancersList = res.data
+			setFreelancers(freelancersList['freelancersList'])
+			setLoading(false)
+		})
+		.catch (function (err) {
 			console.log(err)
-		}
+			setError(true)
+			setErrorContent(err.message)
+		})
 	}, [])
-
-	return (
+	return error ? <SecondHeading $isDarkMode={theme === 'dark'} textAlign="center">Oops, une erreur est survenue, ({errorContent})</SecondHeading>
+	:
+	 (
 			<React.StrictMode>
-				<FirstHeading textAlign="center">Trouvez votre prestataire</FirstHeading>
+				<FirstHeading  textAlign="center">Trouvez votre prestataire</FirstHeading>
 				<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
 				{ 	loading ? 
 						<Loader />
