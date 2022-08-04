@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
 import { Loader } from '../components/Loader'
@@ -22,7 +22,16 @@ const Survey = () => {
 	const previousQuestion = (1 < questionNumberInt < 10) ? `/questionnaire/${questionNumberInt - 1}` : '/'
 	const nextQuestion = `/questionnaire/${questionNumberInt + 1}`
 	
-	const saveReply = answer =>	saveAnswers({ [questionNumber]: answer });
+	const navigate = useNavigate()
+
+	const saveReply = answer =>	{
+
+		saveAnswers({ [questionNumber]: answer })
+
+		if(questionNumber < 6) navigate(`/questionnaire/${questionNumberInt + 1}`)
+		else navigate(`/resultats`)
+		
+	}
 	
 
 	useEffect(() => {
@@ -50,8 +59,12 @@ const Survey = () => {
 			<H1>Question {questionNumberInt}</H1>
 			<Question>{questions[questionNumberInt]}</Question>
 			<Response>
-				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(true)}  >Oui</Button>
-				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(false)}  >Non</Button>
+				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(true)} isSelected={answers[questionNumber] === true}>
+					Oui
+				</Button>
+				<Button blueHover border="2px black solid" padding="25px 100px" margin="0 25px" color="black" onClick={() => saveReply(false)} isSelected={answers[questionNumber] === false}>
+					Non
+				</Button>
 			</Response>
 				{
 					<LinksContainer>
