@@ -40,7 +40,7 @@ const Freelances = () => {
 				<FirstHeading  textAlign="center">Trouvez votre prestataire</FirstHeading>
 				<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
 				{ 	loading ? 
-						<Loader />
+						<Loader data-testid="loader" />
 					: (
 						<CardsContainer display="grid" gridTemplateCol="repeat(auto-fill, 300px)" margin="100px 0" >
 								{ freelancers.map(freelance => 
