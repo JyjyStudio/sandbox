@@ -6,6 +6,9 @@ import { useFetch, useTheme } from '../utils/Hooks/index'
 import { Loader } from '../components/Loader'
 import { StyledLink } from '../components/Navbar'
 import Button from '../components/Button'
+import Img from '../components/Img'
+import EmptyResults from '../assets/empty.svg'
+import EmptyList from '../components/EmptyList'
 
 export default function Results() {
 	const { theme } = useTheme()
@@ -21,46 +24,52 @@ export default function Results() {
 	}
 
 	const resultsData = data?.resultsData
-
+	
 	return isLoading ? (
 		<LoaderWrapper>
 			<Loader data-testid="loader" />
 		</LoaderWrapper>
 	) : (
-		<ResultsContainer theme={theme}>
-			<ResultsTitle theme={theme}>
-				Les compétences dont vous avez besoin&nbsp;:
-			{resultsData &&
-				resultsData.map((result, index) => (
-					<JobTitle key={`result-title-${index}-${result.title}`} theme={theme} >
-						{formatJobList(result.title, resultsData.length, index)}
-					</JobTitle>
-				))
-			}
-			</ResultsTitle>
-			<StyledLink to="/freelances">
-				<Button backgroundColor={colors.blueBackground} margin="20px 0" padding="5px 20px" color="white" hoverColor="black" $isDarkMode={theme === 'dark'} >
-					Découvrez nos profils
-				</Button>
-			</StyledLink>
-			<DescriptionWrapper>
+		resultsData.length ? (
+			<ResultsContainer theme={theme}>
+				<ResultsTitle theme={theme}>
+					Les compétences dont vous avez besoin&nbsp;:
 				{resultsData &&
 					resultsData.map((result, index) => (
-						<JobDescription
-						theme={theme}
-						key={`result-detail-${index}-${result.title}`}
-						>
-							<JobTitle 
-							theme={theme} 
-							data-testid="job-title"
+						<JobTitle key={`result-title-${index}-${result.title}`} theme={theme} >
+							{formatJobList(result.title, resultsData.length, index)}
+						</JobTitle>
+					))
+				}
+				</ResultsTitle>
+				<StyledLink to="/freelances">
+					<Button backgroundColor={colors.blueBackground} margin="20px 0" padding="5px 20px" color="white" hoverColor="black" $isDarkMode={theme === 'dark'} >
+						Découvrez nos profils
+					</Button>
+				</StyledLink>
+				<DescriptionWrapper>
+					{resultsData &&
+						resultsData.map((result, index) => (
+							<JobDescription
+							theme={theme}
+							key={`result-detail-${index}-${result.title}`}
 							>
-								{result.title}
-							</JobTitle>
-							<p data-testid="job-description">{result.description}</p>
-						</JobDescription>
-					))}
-			</DescriptionWrapper>
-		</ResultsContainer>
+								<JobTitle 
+								theme={theme} 
+								data-testid="job-title"
+								>
+									{result.title}
+								</JobTitle>
+								<p data-testid="job-description">{result.description}</p>
+							</JobDescription>
+						))}
+				</DescriptionWrapper>
+			</ResultsContainer>
+		) : (
+			<>
+				<EmptyList isDarkMode={theme === 'dark'} />
+			</>
+		)
 	)
 }
 
