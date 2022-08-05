@@ -4,6 +4,7 @@ const Img = styled.img`
 	width: ${props => props.width};
 	height: ${props => props.height};
 	margin: ${props => props.margin};
-	border-radius: ${props => props.borderRadius}
+	border-radius: ${props => props.borderRadius};
+	display: ${({display}) => display};
 `
 export default Img

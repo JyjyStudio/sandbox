@@ -84,7 +84,7 @@ const Survey = () => {
 }
 
 const SurveyContainer = styled.div`
-	margin: 100px auto 0;
+	margin: 50px auto 0;
 	text-align: center;
 `
 const H1 = styled.h1`
