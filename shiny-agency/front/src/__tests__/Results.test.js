@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom'
 import {
 	render,
 	screen,
-	waitFor,
 	waitForElementToBeRemoved,
 } from '@testing-library/react'
 import { ThemeProvider, SurveyProvider } from '../utils/Context/Context'
