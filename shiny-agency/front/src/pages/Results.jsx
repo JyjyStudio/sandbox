@@ -6,8 +6,6 @@ import { useFetch, useTheme } from '../utils/Hooks/index'
 import { Loader } from '../components/Loader'
 import { StyledLink } from '../components/Navbar'
 import Button from '../components/Button'
-import Img from '../components/Img'
-import EmptyResults from '../assets/empty.svg'
 import EmptyList from '../components/EmptyList'
 
 export default function Results() {
