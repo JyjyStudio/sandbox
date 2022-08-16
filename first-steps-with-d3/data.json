@@ -1,0 +1,22 @@
+[
+	{
+		"pays" : "Tunisie",
+		"prix" : 350
+	},
+	{
+		"pays" : "Egypte",
+		"prix" : 450
+	},
+	{
+		"pays" : "Grèce",
+		"prix" : 300
+	},
+	{
+		"pays" : "Thaïlande",
+		"prix" : 600
+	},
+	{
+		"pays" : "Espagne",
+		"prix" : 200
+	}
+]
