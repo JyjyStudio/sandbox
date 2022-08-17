@@ -13,13 +13,13 @@ const graph = svg.append('g')
 				.attr('width', graphWidth)
 				.attr('height', graphHeight)
 				.attr('transform', `translate(${margin.left}, ${margin.top})`)
-				
+//ajout d'un groupe pour chaque axe
 const groupX = graph.append('g')
 					.attr('transform', `translate(0, ${graphHeight})`)
 const groupY = graph.append('g')
 
+//exploitation des données
 d3.json('./data.json').then(donnee => {
-
 	const min = d3.min(donnee, d => d.prix)
 	const max = d3.max(donnee, d => d.prix)
 	const extent = d3.extent(donnee, d => d.prix) // tableau avec min et max
@@ -54,5 +54,4 @@ d3.json('./data.json').then(donnee => {
 		  .style("font-size", "1rem")
 	groupY.call(axeY)
 		  .style("font-size", "1rem")
-
 })
