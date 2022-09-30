@@ -1,5 +1,6 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 
+//creation d'une partie de notre store (slice). Contient le nom du slice, son state initial et les reducers+
 const todoSlice = createSlice({
 	name: 'todo',
 	initialState: [
@@ -26,9 +27,11 @@ const todoSlice = createSlice({
 	},
 })
 
+// actions creator
 export const { addTask, toggleTask, deleteTask } = todoSlice.actions
 
-export const todoStore = configureStore({
+// creation et configuration du store avec notre store
+export const store = configureStore({
 	reducer: {
 		todo: todoSlice.reducer,
 	},
