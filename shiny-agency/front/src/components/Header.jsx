@@ -30,6 +30,9 @@ const HeaderContainer = styled.header`
 	align-item: center;
 	justify-content: space-between;
 	font-size: calc(10px + 2vmin);
+	@media screen and (max-width: 700px){
+		flex-direction column;
+	}
 `
 
 export default Header

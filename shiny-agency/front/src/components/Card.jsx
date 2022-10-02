@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import colors from '../utils/colors'
 
-const Card = ({ name, jobTitle, picture }) => {
+export default function Card({ name, jobTitle, picture }) {
 	return (
 		<CardContainer>
 			<JobTitle>{jobTitle}</JobTitle>
@@ -28,7 +28,6 @@ const CardContainer = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	width: 200px;
 	height: 200px;
 	border-radius: 30px;
 	padding: 25px;
@@ -51,5 +50,3 @@ const CardImg = styled.img`
 	width: 120px;
 	border-radius: 50%;
 `
-
-export default Card
