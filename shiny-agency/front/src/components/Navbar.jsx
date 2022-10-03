@@ -1,13 +1,13 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../utils/Context/Context'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import colors from '../utils/colors'
 import Button from './Button'
+import { useSelector } from 'react-redux'
+import { selectTheme } from '../utils/redux/selectors'
 
 const Navbar = () => {
 
-	const {theme} = useContext(ThemeContext)
+	const theme = useSelector(selectTheme)
 
 	return (
 		<Nav>

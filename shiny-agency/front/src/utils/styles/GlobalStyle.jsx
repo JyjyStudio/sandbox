@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import { createGlobalStyle } from "styled-components";
-import { ThemeContext } from "../Context/Context";
+import { createGlobalStyle } from 'styled-components'
+import { useSelector } from 'react-redux'
+import { selectTheme } from '../redux/selectors'
 
 export default function GlobalStyle() {
-	const {theme} = useContext(ThemeContext)
+	
+	const theme = useSelector(selectTheme)
 
-	return <StyledGlobalStyle isDarkMode={theme === 'dark'}/>
+	return <StyledGlobalStyle isDarkMode={theme === 'dark'} />
 }
 
 const StyledGlobalStyle = createGlobalStyle`
@@ -14,14 +15,14 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
 	body {
-		background-color: ${props  => props.isDarkMode ? '#333' : '#f1f1f1'};
+		background-color: ${(props) => (props.isDarkMode ? '#333' : '#f1f1f1')};
 	}
 	
     p, a, button, h1 {
-		color: ${props  => props.isDarkMode ? '#f1f1f1' : '#333'}; 
+		color: ${(props) => (props.isDarkMode ? '#f1f1f1' : '#333')}; 
     }
 
 	a:hover{
-		color: ${props => props.isDarkMode ? 'white' : "blue" }
+		color: ${(props) => (props.isDarkMode ? 'white' : 'blue')}
 	}
 `

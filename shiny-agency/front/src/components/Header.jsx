@@ -5,10 +5,11 @@ import Img from './Img'
 import DarkLogo from '../assets/dark-logo.png'
 import LightLogo from '../assets/light-logo.png'
 import { Link } from 'react-router-dom'
-import { ThemeContext } from '../utils/Context/Context'
+import { useSelector } from 'react-redux'
+import { selectTheme } from '../utils/redux/selectors'
 
 const Header = () => {
-	const {theme} = useContext(ThemeContext)
+	const theme = useSelector(selectTheme)
 	return (
 		<HeaderContainer>
 			<Link to="/">
