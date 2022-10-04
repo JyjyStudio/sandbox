@@ -7,8 +7,8 @@ import { toggleTheme } from '../features/theme'
 
 export default function Footer() {
 
-	const theme = useSelector(selectTheme)
 	const dispatch = useDispatch()
+	const theme = useSelector(selectTheme)
 	return (
 		<FooterContainer isDarkMode={theme === 'dark'}>
 			<NightModeBtn
