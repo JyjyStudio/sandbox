@@ -11,7 +11,7 @@ export const setTheme = (theme = 'light') => ({
 })
 
 // on utilise une valeur par défaut pour donner le state initial
-export default function reducer(state = 'light', action) {
+export default function themeReducer(state = 'light', action) {
   if (action.type === TOGGLE_THEME) {
     return state === 'light' ? 'dark' : 'light'
   }
