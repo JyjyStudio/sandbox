@@ -1,57 +1,50 @@
-import React, { useContext, useEffect, useState } from 'react'
 import Card from '../components/Card'
 import {v4 as uuidv4} from 'uuid'
 import styled from 'styled-components'
 import FirstHeading from '../components/FirstHeading'
 import colors from '../utils/colors'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { Loader } from '../components/Loader'
 import SecondHeading from '../components/SecondHeading'
-import { ThemeContext } from '../utils/Context/Context'
+import { useSelector, useStore } from 'react-redux'
+import { selectTheme } from '../utils/redux/selectors'
+import useFetch from '../utils/Hooks/useFetch'
+import { useEffect } from 'react'
+import { fetchOrUpdateFreelances } from '../features/freelances'
 
 const Freelances = () => {
 
-	const {theme} = useContext(ThemeContext)
+	const store = useStore()
+	const theme = useSelector(selectTheme)
 
-	const [freelancers, setFreelancers] = useState([])
-	const [loading, setLoading] = useState(true)
-	
-	const [error, setError] = useState(false)
-	const [errorContent, setErrorContent] = useState('')
+	// on utilise useEffect pour lancer la requête au chargement du composant
+	useEffect(() => {
+    	fetchOrUpdateFreelances(store) // on exécute notre action asynchrone avec le store en paramètre
+ 	}, [store]) // On suit la recommandation d'ESLint de passer le store en dépendances car il est utilisé dans l'effet, cela n'as pas d'impacte sur le fonctionnement car le store ne change jamais
 
-	useEffect( () => {
-		axios.get('http://localhost:8000/freelances')
-		.then(res => {
-			const freelancersList = res.data
-			setFreelancers(freelancersList['freelancersList'])
-			setLoading(false)
-		})
-		.catch (function (err) {
-			console.log(err)
-			setError(true)
-			setErrorContent(err.message)
-		})
-	}, [])
-	return error ? <SecondHeading $isDarkMode={theme === 'dark'} textAlign="center">Oops, une erreur est survenue, ({errorContent})</SecondHeading>
-	:
-	 (
-			<React.StrictMode>
-				<FirstHeading  textAlign="center">Trouvez votre prestataire</FirstHeading>
-				<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
-				{ 	loading ? 
-						<Loader data-testid="loader" />
-					: (
-						<CardsContainer display="grid" gridTemplateCol="repeat(auto-fill, 300px)" margin="100px 0" >
-								{ freelancers.map(freelance => 
-									<LinkedCards to={'/freelances/' + freelance.name.split(' ').join('-')} key={uuidv4()} state={freelance}>
-										<Card jobTitle={freelance.job} picture={freelance.picture} name={freelance.name} />
-									</LinkedCards>
-								)}
-							</CardsContainer>
-					) 
-				}
-			</React.StrictMode>
+	const { data, loading, error } = useFetch(`http://localhost:8000/freelances`)
+	const freelancersList = data?.freelancersList
+
+	if(error) {
+		return  <SecondHeading $isDarkMode={theme === 'dark'} textAlign="center">Oops, une erreur est survenue, ({error.message})</SecondHeading>
+	}
+	else return (
+		<>
+			<FirstHeading  textAlign="center">Trouvez votre prestataire</FirstHeading>
+			<Slogan>Chez Shiny nous réunissons les meilleurs profils pour vous.</Slogan>
+			{ loading ? 
+					<Loader data-testid="loader" />
+				: (
+					<CardsContainer display="grid" gridTemplateCol="repeat(auto-fill, 300px)" margin="100px 0" >
+						{ freelancersList.map(freelance => 
+							<LinkedCards to={'/freelances/' + freelance.name.split(' ').join('-')} key={uuidv4()} state={freelance}>
+								<Card jobTitle={freelance.job} picture={freelance.picture} name={freelance.name} />
+							</LinkedCards>
+						)}
+					</CardsContainer>
+				) 
+			}
+		</>
 	)
 }
 
